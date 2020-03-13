@@ -124,8 +124,6 @@ def graph_record_overtime():
 
 
 
-
-
 #+++++++  FUNCTIONS  +++++++#
 def count_all_values(dictselection):
     count = 0
@@ -136,7 +134,7 @@ def count_all_values(dictselection):
             count = count + 1
     print(f"\n Count of all values: {count}\n")
     print(Counter(dictselection.values()))
-
+    print("")
 
 def count_unique_values(dictselection):
     unique_values = []
@@ -152,6 +150,23 @@ def count_unique_values(dictselection):
                 count = count + 1
     print(f"\n Count of all unique values: {count}\n")
     print(Counter(dictselection.values()))
+    print("")
+
+def count_greatest_value(dictselection):
+    count = 1
+    print(f"\nCount total: {count}\n")
+    data_breakdown = Counter(dictselection.values())
+    greatest_value = data_breakdown.most_common(1)
+    print(greatest_value)
+    print("")
+
+def count_least_value(dictselection):
+    count = 1
+    print(f"\nCount total: {count}\n")
+    data_breakdown = Counter(dictselection.values())
+    least_value = data_breakdown.most_common()[:-2:-1]
+    print(least_value)
+    print("")
 
 def list_all_values(dictselection):
     all_values = []
@@ -179,30 +194,6 @@ def list_unique_values(dictselection):
 
 
 
-
-# >>> l = ["a","b","b"]
-# >>> from collections import Counter
-# >>> Counter(l)
-# Counter({'b': 2, 'a': 1})
-
-# a = Counter(dictselection.values()
-# print(a)
-# print(a.values())
-
-
-
-
-
-
-
-
-
-
-
-
-def count_greatest_least_value():
-    count = 1
-    print(f"\nCount total: {count}\n")
 
 
 ########### NEED TO FINISH THIS ONE #############
@@ -297,9 +288,9 @@ def combo_button_press():
             elif "Location" in result_list:
                 count_all_values(location_dict)
             elif "Record" in result_list:
-                count_all_values(color_dict)
-            elif "Reason" in result_list:
                 count_all_values(record_dict)
+            elif "Reason" in result_list:
+                count_all_values(reason_dict)
             elif "Make" in result_list:
                 count_all_values(make_dict)
             elif "Model" in result_list:
@@ -322,9 +313,9 @@ def combo_button_press():
             elif "Location" in result_list:
                 count_unique_values(location_dict)
             elif "Record" in result_list:
-                count_unique_values(color_dict)
-            elif "Reason" in result_list:
                 count_unique_values(record_dict)
+            elif "Reason" in result_list:
+                count_unique_values(reason_dict)
             elif "Make" in result_list:
                 count_unique_values(make_dict)
             elif "Model" in result_list:
@@ -338,9 +329,55 @@ def combo_button_press():
             elif "Speeds" in result_list:
                 count_unique_values(speeds_dict)
         elif "Greatest Value" in result_list:
-            count_greatest_least_value()
+            if "Date" in result_list:
+                count_greatest_value(date_dict)
+            elif "Day of Week" in result_list:
+                count_greatest_value(day_dict)
+            elif "Time" in result_list:
+                count_greatest_value(time_dict)
+            elif "Location" in result_list:
+                count_greatest_value(location_dict)
+            elif "Record" in result_list:
+                count_greatest_value(record_dict)
+            elif "Reason" in result_list:
+                count_greatest_value(reason_dict)
+            elif "Make" in result_list:
+                count_greatest_value(make_dict)
+            elif "Model" in result_list:
+                count_greatest_value(model_dict)
+            elif "Frame" in result_list:
+                count_greatest_value(frame_dict)
+            elif "Type" in result_list:
+                count_greatest_value(bike_type_dict)
+            elif "Color" in result_list:
+                count_greatest_value(color_dict)
+            elif "Speeds" in result_list:
+                count_greatest_value(speeds_dict)
         elif "Least Value" in result_list:
-            count_greatest_least_value()
+            if "Date" in result_list:
+                count_least_value(date_dict)
+            elif "Day of Week" in result_list:
+                count_least_value(day_dict)
+            elif "Time" in result_list:
+                count_least_value(time_dict)
+            elif "Location" in result_list:
+                count_least_value(location_dict)
+            elif "Record" in result_list:
+                count_least_value(record_dict)
+            elif "Reason" in result_list:
+                count_least_value(reason_dict)
+            elif "Make" in result_list:
+                count_least_value(make_dict)
+            elif "Model" in result_list:
+                count_least_value(model_dict)
+            elif "Frame" in result_list:
+                count_least_value(frame_dict)
+            elif "Type" in result_list:
+                count_least_value(bike_type_dict)
+            elif "Color" in result_list:
+                count_least_value(color_dict)
+            elif "Speeds" in result_list:
+                count_least_value(speeds_dict)
         elif "Comparison" in result_list:
             print("Sorry, unable to perform this calculation.")
         elif "Over Time" in result_list:
