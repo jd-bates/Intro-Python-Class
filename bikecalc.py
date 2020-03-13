@@ -3,6 +3,7 @@
 from tkinter import *
 import math
 import time
+from collections import Counter
 import csv
 import plotly.graph_objects as go
 import plotly.express as px
@@ -65,9 +66,6 @@ speeds_dict = dict(zip(record_keys,speeds_values))
 
 master_dict_list = [record_dict, date_dict, day_dict, time_dict, location_dict, 
 reason_dict, make_dict, model_dict, frame_dict, bike_type_dict, color_dict, speeds_dict]
-
-
-
 
 
 # for key, value in make_dict.items():
@@ -136,7 +134,9 @@ def count_all_values(dictselection):
             pass
         else:
             count = count + 1
-    print(f"\nCount all: {count}\n")
+    print(f"\n Count of all values: {count}\n")
+    print(Counter(dictselection.values()))
+
 
 def count_unique_values(dictselection):
     unique_values = []
@@ -150,17 +150,18 @@ def count_unique_values(dictselection):
             else:
                 unique_values.append(i)
                 count = count + 1
-    print(f"\nCount unique: {count}\n")
+    print(f"\n Count of all unique values: {count}\n")
+    print(Counter(dictselection.values()))
 
 def list_all_values(dictselection):
-    unique_values = []
+    all_values = []
     for i in dictselection.values():
         if i == "":
             pass
         else:
-            unique_values.append(i)
+            all_values.append(i)
     # unique_values.sort()
-    print(f"\nAll values: {unique_values}\n")
+    print(f"\n List of all values: {all_values}\n")
 
 def list_unique_values(dictselection):
     unique_values = []
@@ -173,7 +174,31 @@ def list_unique_values(dictselection):
             else:
                 unique_values.append(i)
     unique_values.sort()
-    print(f"\nUnique values: {unique_values}\n")
+    print(f"\n List of all unique values: {unique_values}\n")
+
+
+
+
+
+# >>> l = ["a","b","b"]
+# >>> from collections import Counter
+# >>> Counter(l)
+# Counter({'b': 2, 'a': 1})
+
+# a = Counter(dictselection.values()
+# print(a)
+# print(a.values())
+
+
+
+
+
+
+
+
+
+
+
 
 def count_greatest_least_value():
     count = 1
