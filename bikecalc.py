@@ -80,7 +80,6 @@ def count_all_values(dictselection):
         else:
             count = count + 1
     print(f"Count of all values: {count}\n")
-    print(Counter(dictselection.values()))
     print("")
 def count_unique_values(dictselection):
     unique_values = []
@@ -96,6 +95,7 @@ def count_unique_values(dictselection):
                 count = count + 1
     print(f"Count of all unique values: {count}\n")
     print(Counter(dictselection.values()))
+    # print(unique_values)
     print("")
 def count_greatest_value(dictselection):
     count = 1
@@ -114,9 +114,17 @@ def count_least_value(dictselection):
     print("Info: '"+least_value_list[0] +"', Value: " +str(least_value_list[1]))
     print("")
 def count_over_time(dictselection):
-    pass
+    print("Sorry, calculation is too large to complete. Try graphing over time instead.")
 def count_comparison(dictselection):
-    pass
+    count = 0
+    for i in dictselection.values():
+        if i == "":
+            pass
+        else:
+            count = count + 1
+    print(f"Comparison of all values: {count}\n")
+    print(Counter(dictselection.values()))
+    print("")
 def list_all_values(dictselection):
     all_values = []
     for i in dictselection.values():
@@ -149,45 +157,164 @@ def list_least_value(dictselection):
     print("Least value: "+least_value[0][0])
     print("")
 def list_over_time(dictselection):
-    pass
+    print("Sorry, calculation is too large to complete.")
 def list_comparison(dictselection):
-    pass
+    count = 0
+    for i in dictselection.values():
+        if i == "":
+            pass
+        else:
+            count = count + 1
+    print(f"Comparison of all values as % of total: \n")
+
+    data_breakdown = Counter(dictselection.values())
+    # print(type(a))
+    def Convert(tup, di): 
+        di = dict(tup) 
+        return di 
+    percent_values = data_breakdown.most_common(count)
+    dictionary = {} 
+    percent_values_dict = Convert(percent_values, dictionary)
+    # print(b_dict)
+    for i in percent_values_dict:
+        percent_values_dict[i] = (percent_values_dict[i]/count)*100
+        percent_values_dict[i] = ("%.2f" % percent_values_dict[i])
+    # print(type(b_dict))
+    print(percent_values_dict)
+    print("")
 def graph_all_values(dictselection):
-    pass
+    print("Sorry, calculation is too large to complete. Try graphing 'Unique Values' instead.")
 def graph_unique_values(dictselection):
-    pass
-def graph_greatest_value(dictselection):
-    pass
-def graph_least_value(dictselection):
-    pass
-def graph_over_time(dictselection):
-    fig1 = px.scatter(x=list(date_dict.values()), y=list(dictselection.values()))#.sort())
-    fig1.update_layout(title="Bike Impounds Over Time", xaxis_title="Time",yaxis_title="Count")
-    fig1.show()
-
-
-def graph_comparison(dictselection):
+    count = 0
+    for i in dictselection.values():
+        if i == "":
+            pass
+        else:
+            count = count + 1
+    # print(count)
     print("")
     data_breakdown = Counter(dictselection.values())
     def Convert(tup, di): 
         di = dict(tup) 
         return di 
-    greatest10_values = data_breakdown.most_common(6916)
+    greatest_values = data_breakdown.most_common(count)
     dictionary = {} 
-    greatest10_values_dict = Convert(greatest10_values, dictionary)
-    print(type(greatest10_values_dict))
-    print(greatest10_values_dict)
-    print("")
+    greatest_values_dict = Convert(greatest_values, dictionary)
+    
+    bike_info = greatest_values_dict.keys()
+    amount = greatest_values_dict.values()
+    y_pos = np.arange(len(bike_info))
 
-    labels = greatest10_values_dict.keys()
-    sizes = greatest10_values_dict.values()
+    plt.bar(y_pos, amount, align='center', alpha=0.5)
+    plt.xticks(y_pos, bike_info)
+    plt.ylabel('Count of Value')
+    plt.title('Unique Values')
+    plt.show()
+def graph_greatest_value(dictselection):
+    count = 0
+    for i in dictselection.values():
+        if i == "":
+            pass
+        else:
+            count = count + 1
+    data_breakdown = Counter(dictselection.values())
+    def Convert(tup, di): 
+        di = dict(tup) 
+        return di
+    greatest_values = data_breakdown.most_common(count)
+    largest = data_breakdown.most_common(1)
+    dictionary = {} 
+    greatest_values_dict = Convert(greatest_values, dictionary)    
+    largest_dict = Convert(largest, dictionary)
+
+    largest_dict_values_list = [i for i in largest_dict.values()]
+    strings = [str(largest_dict_values_list) for largest_dict_values_list in largest_dict_values_list]
+    value_string = "".join(strings)
+    value_integer = int(value_string)
+
+    largest_dict_keys_list = [i for i in largest_dict]
+    strings = [str(largest_dict_keys_list) for largest_dict_keys_list in largest_dict_keys_list]
+    key_string = "".join(strings)
+
+    bike_info = ["Largest Value"] #list(greatest_values_dict.values()) #[2014, 2015, 2016, 2017, 2018, 2019]  
+    largest_bike = largest_dict_values_list #[39, 117, 98, 54, 28, 15]  
+    total_minus_large = count - value_integer
+    rest = []
+    rest.append(total_minus_large)
+    plt.bar(bike_info, largest_bike, color="blue")
+    plt.bar(bike_info, rest, bottom=largest_bike, color="orange")
+    plt.xlabel(f"Bike Info: {key_string}, Largest Value: {value_integer}")
+    plt.ylabel('Value Count')
+    plt.title("Largest Value vs. Rest of Values")
+    plt.show()
+def graph_least_value(dictselection):
+    count = 0
+    for i in dictselection.values():
+        if i == "":
+            pass
+        else:
+            count = count + 1
+    data_breakdown = Counter(dictselection.values())
+    def Convert(tup, di): 
+        di = dict(tup) 
+        return di
+    least_values = data_breakdown.most_common(count)
+    least = data_breakdown.most_common()[:-2:-1]
+    dictionary = {} 
+    least_values_dict = Convert(least_values, dictionary)    
+    least_dict = Convert(least, dictionary)
+
+    least_dict_values_list = [i for i in least_dict.values()]
+    strings = [str(least_dict_values_list) for least_dict_values_list in least_dict_values_list]
+    value_string = "".join(strings)
+    value_integer = int(value_string)
+
+    least_dict_keys_list = [i for i in least_dict]
+    strings = [str(least_dict_keys_list) for least_dict_keys_list in least_dict_keys_list]
+    key_string = "".join(strings)
+
+    bike_info = ["Least Value"] #list(greatest_values_dict.values()) #[2014, 2015, 2016, 2017, 2018, 2019]  
+    least_bike = least_dict_values_list #[39, 117, 98, 54, 28, 15]  
+    total_minus_least = count - value_integer
+    rest = []
+    rest.append(total_minus_least)
+    plt.bar(bike_info, least_bike, color="blue")
+    plt.bar(bike_info, rest, bottom=least_bike, color="orange")
+    plt.xlabel(f"Bike Info: {key_string}, Least Value: {value_integer}")
+    plt.ylabel('Value Count')
+    plt.title("Least Value vs. Rest of Values")
+    plt.show()
+def graph_over_time(dictselection):
+    fig1 = px.scatter(x=list(date_dict.values()), y=list(dictselection.values()))#.sort())
+    fig1.update_layout(title="Bike Impounds Over Time", xaxis_title="Time",yaxis_title="Count")
+    fig1.show()
+def graph_comparison(dictselection):
+    count = 0
+    for i in dictselection.values():
+        if i == "":
+            pass
+        else:
+            count = count + 1
+    # print(count)
+    print("")
+    data_breakdown = Counter(dictselection.values())
+    def Convert(tup, di): 
+        di = dict(tup) 
+        return di 
+    greatest_values = data_breakdown.most_common(count)
+    dictionary = {} 
+    greatest_values_dict = Convert(greatest_values, dictionary)
+    # print(type(greatest_values_dict))
+    # print(greatest_values_dict)
+    # print("")
+
+    labels = greatest_values_dict.keys()
+    sizes = greatest_values_dict.values()
     fig1, ax1 = plt.subplots()
     ax1.pie(sizes, labels=labels, autopct='%1.1f%%',
             shadow=True, startangle=90)
     ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
     plt.show()
-
-
 
 ######### TKINTER FUNCTIONS ##########
 bikeinfo_value = ""
@@ -233,13 +360,12 @@ def btn_clear_top():
     global datarep_value
     datarep_value = ""
     datarep_input_text.set("")
-
 def combo_button_press():
     print("")
     print("Buttons Pressed:")
     print(f"'{result_list[0]}', '{result_list[1]}', '{result_list[2]}'")
     print("")
-    if "Count" in result_list:                          ####### COUNT #######
+    if "Count" in result_list:                          ####### COUNT ####### done
         if "All Values" in result_list:
             if "Date" in result_list:
                 count_all_values(date_dict)
@@ -265,6 +391,8 @@ def combo_button_press():
                 count_all_values(color_dict)
             elif "Speeds" in result_list:
                 count_all_values(speeds_dict)
+            else:
+                print("Sorry, unable to perform this calculation.")
         elif "Unique Values" in result_list:
             if "Date" in result_list:
                 count_unique_values(date_dict)
@@ -290,6 +418,8 @@ def combo_button_press():
                 count_unique_values(color_dict)
             elif "Speeds" in result_list:
                 count_unique_values(speeds_dict)
+            else:
+                print("Sorry, unable to perform this calculation.")
         elif "Greatest Value" in result_list:
             if "Date" in result_list:
                 count_greatest_value(date_dict)
@@ -345,12 +475,62 @@ def combo_button_press():
             else:
                 print("Sorry, unable to perform this calculation.")
         elif "Comparison" in result_list:
-            print("Still under construction.")
+            if "Date" in result_list:
+                count_comparison(date_dict)
+            elif "Day of Week" in result_list:
+                count_comparison(day_dict)
+            elif "Time" in result_list:
+                count_comparison(time_dict)
+            elif "Location" in result_list:
+                count_comparison(location_dict)
+            elif "Record" in result_list:
+                count_comparison(record_dict)
+            elif "Reason" in result_list:
+                count_comparison(reason_dict)
+            elif "Make" in result_list:
+                count_comparison(make_dict)
+            elif "Model" in result_list:
+                count_comparison(model_dict)
+            elif "Frame" in result_list:
+                count_comparison(frame_dict)
+            elif "Type" in result_list:
+                count_comparison(bike_type_dict)
+            elif "Color" in result_list:
+                count_comparison(color_dict)
+            elif "Speeds" in result_list:
+                count_comparison(speeds_dict)
+            else:
+                print("Sorry, unable to perform this calculation.")
         elif "Over Time" in result_list:
-            print("Still under construction.")
+            if "Date" in result_list:
+                count_over_time(date_dict)
+            elif "Day of Week" in result_list:
+                count_over_time(day_dict)
+            elif "Time" in result_list:
+                count_over_time(time_dict)
+            elif "Location" in result_list:
+                count_over_time(location_dict)
+            elif "Record" in result_list:
+                count_over_time(record_dict)
+            elif "Reason" in result_list:
+                count_over_time(reason_dict)
+            elif "Make" in result_list:
+                count_over_time(make_dict)
+            elif "Model" in result_list:
+                count_over_time(model_dict)
+            elif "Frame" in result_list:
+                count_over_time(frame_dict)
+            elif "Type" in result_list:
+                count_over_time(bike_type_dict)
+            elif "Color" in result_list:
+                count_over_time(color_dict)
+            elif "Speeds" in result_list:
+                count_over_time(speeds_dict)
+            else:
+                print("Sorry, unable to perform this calculation.")
         else:
             print("Sorry, unable to perform this calculation.")
-    elif "List/Print" in result_list:                   ####### LIST/PRINT #######
+    elif "List/Print" in result_list:                   ####### LIST/PRINT ####### done
         if "All Values" in result_list:
             if "Date" in result_list:
                 list_all_values(date_dict)
@@ -460,68 +640,170 @@ def combo_button_press():
             else:
                 print("Sorry, unable to perform this calculation.")
         elif "Comparison" in result_list:
-            print("Sorry, unable to perform this calculation.")
+            if "Date" in result_list:
+                list_comparison(date_dict)
+            elif "Day of Week" in result_list:
+                list_comparison(day_dict)
+            elif "Time" in result_list:
+                list_comparison(time_dict)
+            elif "Location" in result_list:
+                list_comparison(location_dict)
+            elif "Record" in result_list:
+                list_comparison(record_dict)
+            elif "Reason" in result_list:
+                list_comparison(reason_dict)
+            elif "Make" in result_list:
+                list_comparison(make_dict)
+            elif "Model" in result_list:
+                list_comparison(model_dict)
+            elif "Frame" in result_list:
+                list_comparison(frame_dict)
+            elif "Type" in result_list:
+                list_comparison(bike_type_dict)
+            elif "Color" in result_list:
+                list_comparison(color_dict)
+            elif "Speeds" in result_list:
+                list_comparison(speeds_dict)
+            else:
+                print("Sorry, unable to perform this calculation.")
         elif "Over Time" in result_list:
-            print("Still under construction.")
-    elif "Graph" in result_list:                        ####### GRAPH #######
+            if "Date" in result_list:
+                list_over_time(date_dict)
+            elif "Day of Week" in result_list:
+                list_over_time(day_dict)
+            elif "Time" in result_list:
+                list_over_time(time_dict)
+            elif "Location" in result_list:
+                list_over_time(location_dict)
+            elif "Record" in result_list:
+                list_over_time(record_dict)
+            elif "Reason" in result_list:
+                list_over_time(reason_dict)
+            elif "Make" in result_list:
+                list_over_time(make_dict)
+            elif "Model" in result_list:
+                list_over_time(model_dict)
+            elif "Frame" in result_list:
+                list_over_time(frame_dict)
+            elif "Type" in result_list:
+                list_over_time(bike_type_dict)
+            elif "Color" in result_list:
+                list_over_time(color_dict)
+            elif "Speeds" in result_list:
+                list_over_time(speeds_dict)
+            else:
+                print("Sorry, unable to perform this calculation.")
+        else:
+            print("Sorry, unable to perform this calculation.")
+    elif "Graph" in result_list:                        ####### GRAPH ####### done
         if "All Values" in result_list:
             if "Date" in result_list:
-                list_all_values(date_dict)
+                graph_all_values(date_dict)
             elif "Day of Week" in result_list:
-                list_all_values(day_dict)
+                graph_all_values(day_dict)
             elif "Time" in result_list:
-                list_all_values(time_dict)
+                graph_all_values(time_dict)
             elif "Location" in result_list:
-                list_all_values(location_dict)
+                graph_all_values(location_dict)
             elif "Record" in result_list:
-                list_all_values(record_dict)
+                graph_all_values(record_dict)
             elif "Reason" in result_list:
-                list_all_values(reason_dict)
+                graph_all_values(reason_dict)
             elif "Make" in result_list:
-                list_all_values(make_dict)
+                graph_all_values(make_dict)
             elif "Model" in result_list:
-                list_all_values(model_dict)
+                graph_all_values(model_dict)
             elif "Frame" in result_list:
-                list_all_values(frame_dict)
+                graph_all_values(frame_dict)
             elif "Type" in result_list:
-                list_all_values(bike_type_dict)
+                graph_all_values(bike_type_dict)
             elif "Color" in result_list:
-                list_all_values(color_dict)
+                graph_all_values(color_dict)
             elif "Speeds" in result_list:
-                list_all_values(speeds_dict)
+                graph_all_values(speeds_dict)
             else:
                 print("Sorry, unable to perform this calculation.")
         elif "Unique Values" in result_list:
             if "Date" in result_list:
-                list_unique_values(date_dict)
+                graph_unique_values(date_dict)
             elif "Day of Week" in result_list:
-                list_unique_values(day_dict)
+                graph_unique_values(day_dict)
             elif "Time" in result_list:
-                list_unique_values(time_dict)
+                graph_unique_values(time_dict)
             elif "Location" in result_list:
-                list_unique_values(location_dict)
+                graph_unique_values(location_dict)
             elif "Record" in result_list:
-                list_unique_values(record_dict)
+                graph_unique_values(record_dict)
             elif "Reason" in result_list:
-                list_unique_values(reason_dict)
+                graph_unique_values(reason_dict)
             elif "Make" in result_list:
-                list_unique_values(make_dict)
+                graph_unique_values(make_dict)
             elif "Model" in result_list:
-                list_unique_values(model_dict)
+                graph_unique_values(model_dict)
             elif "Frame" in result_list:
-                list_unique_values(frame_dict)
+                graph_unique_values(frame_dict)
             elif "Type" in result_list:
-                list_unique_values(bike_type_dict)
+                graph_unique_values(bike_type_dict)
             elif "Color" in result_list:
-                list_unique_values(color_dict)
+                graph_unique_values(color_dict)
             elif "Speeds" in result_list:
-                list_unique_values(speeds_dict)
+                graph_unique_values(speeds_dict)
             else:
                 print("Sorry, unable to perform this calculation.")
         elif "Greatest Value" in result_list:
-            list_greatest_least_value()
+            if "Date" in result_list:
+                graph_greatest_value(date_dict)
+            elif "Day of Week" in result_list:
+                graph_greatest_value(day_dict)
+            elif "Time" in result_list:
+                graph_greatest_value(time_dict)
+            elif "Location" in result_list:
+                graph_greatest_value(location_dict)
+            elif "Record" in result_list:
+                graph_greatest_value(record_dict)
+            elif "Reason" in result_list:
+                graph_greatest_value(reason_dict)
+            elif "Make" in result_list:
+                graph_greatest_value(make_dict)
+            elif "Model" in result_list:
+                graph_greatest_value(model_dict)
+            elif "Frame" in result_list:
+                graph_greatest_value(frame_dict)
+            elif "Type" in result_list:
+                graph_greatest_value(bike_type_dict)
+            elif "Color" in result_list:
+                graph_greatest_value(color_dict)
+            elif "Speeds" in result_list:
+                graph_greatest_value(speeds_dict)
+            else:
+                print("Sorry, unable to perform this calculation.")
         elif "Least Value" in result_list:
-            list_greatest_least_value()
+            if "Date" in result_list:
+                graph_least_value(date_dict)
+            elif "Day of Week" in result_list:
+                graph_least_value(day_dict)
+            elif "Time" in result_list:
+                graph_least_value(time_dict)
+            elif "Location" in result_list:
+                graph_least_value(location_dict)
+            elif "Record" in result_list:
+                graph_least_value(record_dict)
+            elif "Reason" in result_list:
+                graph_least_value(reason_dict)
+            elif "Make" in result_list:
+                graph_least_value(make_dict)
+            elif "Model" in result_list:
+                graph_least_value(model_dict)
+            elif "Frame" in result_list:
+                graph_least_value(frame_dict)
+            elif "Type" in result_list:
+                graph_least_value(bike_type_dict)
+            elif "Color" in result_list:
+                graph_least_value(color_dict)
+            elif "Speeds" in result_list:
+                graph_least_value(speeds_dict)
+            else:
+                print("Sorry, unable to perform this calculation.")
         elif "Comparison" in result_list:
             if "Date" in result_list:
                 graph_comparison(date_dict)
@@ -576,32 +858,24 @@ def combo_button_press():
                 graph_over_time(speeds_dict)
             else:
                 print("Sorry, unable to perform this calculation.")
-
-
-
+        else:
+            print("Sorry, unable to perform this calculation.")
+    else:
+        print("Sorry, unable to perform this calculation.")
 def btn_equal():
     global datatype_value
     global bikeinfo_value
     global datarep_value
     global result_list
     active = True
-    # result_list = []  ###may not need this initially
-    result = str(datarep_value+ ", " +bikeinfo_value+ ", " +datatype_value) # 'eval' function evalutes the string expression directly
+    result = str(datarep_value+ ", " +bikeinfo_value+ ", " +datatype_value)
     result_list = [datarep_value, bikeinfo_value, datatype_value]
     if datarep_value != "" and bikeinfo_value != "" and datatype_value != "":
-        result_input_text.set(result) ##only enact this "if" datarep_value, bikeinfo_value, and datatype_value != Null
+        result_input_text.set(result)
     else:
         result_input_text.set("")
-    # print(f"result is: {result}") ###print this
-    # for i in result:
-    #     result_list.append(i)
-    #     result_list_join = "".join(result_list)
-    # result_list = result_list_join.split(", ")
-    # print(f"result_list: {result_list}")###print this
-    # print(result_list)
     btn_clear_top()
-    combo_button_press()#result_list[0],result_list[1],result_list[2])
-
+    combo_button_press()
 
 ########## TKINTER SETUP ##########
 root = Tk()
@@ -663,20 +937,8 @@ button_clear = Button(button_frame, text="Clear All", bg="white", fg="red", comm
 result_label = Label(root, text="RESULT", font='Arial 14 bold')
 result_label.pack()
 result_entry_frame = Frame(root)
-result_entry_frame.pack()#side=RIGHT)
+result_entry_frame.pack()
 result_input_field = Entry(result_entry_frame, textvariable = result_input_text, bg="black", fg="white", width=30).grid(row=0, column=0)
 
 root.mainloop()
-
-
-#the following gives combos:
-# from itertools import combinations 
-# comb = combinations(["Count","List","Graph","Date","Day of Week","Time","Location","Record","Reason","Make","Model","Frame","Type","Color","Speeds","All Values","Unique Values","Greatest Value","Least Value","Comparison","Over Time"],3)
-# for i in list(comb): 
-#     print(i) 
-
-
-
-
-
 
