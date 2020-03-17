@@ -79,8 +79,12 @@ def count_all_values(dictselection):
             pass
         else:
             count = count + 1
+    # a = (f"Count of all values: {count}\n")
     print(f"Count of all values: {count}\n")
+    # results_printed = str(a)
+    # results_printed_input_text.set(results_printed)
     print("")
+
 def count_unique_values(dictselection):
     unique_values = []
     count = 0
@@ -95,8 +99,15 @@ def count_unique_values(dictselection):
                 count = count + 1
     print(f"Count of all unique values: {count}\n")
     print(Counter(dictselection.values()))
-    # print(unique_values)
+    # a = (f"Count of all unique values: {count}\n")
+    # b = (Counter(dictselection.values()))
+    # results_printed = str(a)
+    # results_printed_input_text.set(results_printed)
+    # results_printed = str(b)
+    # results_printed_input_text.set(results_printed)
     print("")
+
+
 def count_greatest_value(dictselection):
     count = 1
     print(f"Count total: {count}\n")
@@ -321,6 +332,7 @@ bikeinfo_value = ""
 datatype_value = ""
 datarep_value = ""
 result_value = ""
+results_printed_value = ""
 datarep_list = ["Count","List","Graph"]
 bikeinfo_list = ["Date","Day of Week","Time","Location","Record","Reason","Make","Model","Frame","Type","Color","Speeds"]
 datatype_list = ["All Values","Unique Values","Greatest Value","Least Value","Comparison","Over Time"]
@@ -350,6 +362,9 @@ def btn_clear_all():
     global result_value
     result_value = ""
     result_input_text.set("")
+    global results_printed_value
+    results_printed_value = ""
+    results_printed_input_text.set("")
 def btn_clear_top():
     global bikeinfo_value
     bikeinfo_value = ""
@@ -874,6 +889,7 @@ def btn_equal():
         result_input_text.set(result)
     else:
         result_input_text.set("")
+    # TextEntry()
     btn_clear_top()
     combo_button_press()
 
@@ -885,6 +901,7 @@ datarep_input_text = StringVar()
 bikeinfo_input_text = StringVar()
 datatype_input_text = StringVar()
 result_input_text = StringVar()
+results_printed_input_text = StringVar()
 
 data_rep_label = Label(root, text="DATA REPRESENTATION", fg="blue", font='Arial 14 bold')
 data_rep_label.pack()
@@ -939,6 +956,21 @@ result_label.pack()
 result_entry_frame = Frame(root)
 result_entry_frame.pack()
 result_input_field = Entry(result_entry_frame, textvariable = result_input_text, bg="black", fg="white", width=30).grid(row=0, column=0)
+
+
+
+
+
+###### ###### ###### TEST TEST TEST TEST TEST ###### ###### ######                              ***THIS WOULD PRINT OUTPUT IN APP***
+# results_printed_label = Label(root, text="RESULTS PRINTED", font='Arial 14 bold')
+# results_printed_label.pack()
+# results_printed_entry_frame = Frame(root)
+# results_printed_entry_frame.pack(expand=1)   #, fill=x)
+# results_printed_input_field = Entry(results_printed_entry_frame, textvariable = results_printed_input_text, bg="black", fg="white", width=30).grid(row=0, column=0)
+
+
+
+
 
 root.mainloop()
 
