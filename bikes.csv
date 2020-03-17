@@ -1,4 +1,3 @@
-record,date,day,time,location,reason,make,model,frame,bike_type,color,speeds
 1,6/18/13,MONDAY,,FT,ABANDONED,Huffy,Cranbrook,FEMALE,CRUISER,YELLOW,1
 2,6/19/13,WEDNESDAY,,UNK,ABANDONED,Huffy,Panama Jack,MALE,CRUISER,BLACK,1
 3,6/19/13,,,FT TENNIS COURTS,ABANDONED,Unknown,Unknown,MALE,ROAD,BLACK,1
