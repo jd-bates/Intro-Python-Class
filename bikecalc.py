@@ -889,7 +889,7 @@ def btn_equal():
         result_input_text.set(result)
     else:
         result_input_text.set("")
-    # TextEntry()
+    TextEntry()
     btn_clear_top()
     combo_button_press()
 
@@ -957,13 +957,17 @@ result_entry_frame = Frame(root)
 result_entry_frame.pack()
 result_input_field = Entry(result_entry_frame, textvariable = result_input_text, bg="black", fg="white", width=30).grid(row=0, column=0)
 
-
+results_printed_label = Label(root, text="SEARCH HISTORY", font='Arial 14 bold')
+results_printed_label.pack()
 
 
 
 ###### ###### ###### TEST TEST TEST TEST TEST ###### ###### ######                              ***THIS WOULD PRINT OUTPUT IN APP***
-# results_printed_label = Label(root, text="RESULTS PRINTED", font='Arial 14 bold')
-# results_printed_label.pack()
+def TextEntry():
+    # results_printed_label = Label(root, text="SEARCH HISTORY", font='Arial 14 bold')
+    # results_printed_label.pack()
+    results_printed_label = Label(root, text=result_list, font='Arial 14 bold')
+    results_printed_label.pack()
 # results_printed_entry_frame = Frame(root)
 # results_printed_entry_frame.pack(expand=1)   #, fill=x)
 # results_printed_input_field = Entry(results_printed_entry_frame, textvariable = results_printed_input_text, bg="black", fg="white", width=30).grid(row=0, column=0)
